@@ -1,11 +1,11 @@
-const express = require('express');
-const http = require('http');
-const url = require('url');
-const WebSocket = require('ws');
-const nodemailer = require('nodemailer');
+var express = require('express');
+var http = require('http');
+var url = require('url');
+var WebSocket = require('ws');
+var nodemailer = require('nodemailer');
 
 
-const app = express();
+var app = express();
 
 
 
@@ -66,8 +66,8 @@ setInterval(checkError,3600000);
         });
 
 
-        const wssStream = new WebSocket("wss://stream.camcolt.com:8443/call");
-        const wssChat = new WebSocket("wss://chat.camcolt.com:8081/socket");
+        var wssStream = new WebSocket("wss://stream.camcolt.com:8443/call");
+        var wssChat = new WebSocket("wss://chat.camcolt.com:8081/socket");
 
 
         wssChat.on('connection', function connection(ws, req) {
