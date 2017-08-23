@@ -7,10 +7,10 @@ const nodemailer = require('nodemailer');
 
 const app = express();
 
-'use strict';
+
 
 // create reusable transporter object using the default SMTP transport
-let transporter = nodemailer.createTransport({
+var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'it@camcolt.com',
@@ -19,7 +19,7 @@ let transporter = nodemailer.createTransport({
 });
 
 // setup email data with unicode symbols
-let mailOptions = {
+var mailOptions = {
     from:"it@camcolt.com", // sender address
     to: 'd.kostrzewa@iceo.co', // list of receivers
     subject: 'Camcolt Error', // Subject line
@@ -44,7 +44,7 @@ setInterval(checkError,3600000);
             console.log("Got response: " + res.statusCode);
             if(parseInt(res.statusCode) >=300 && parseInt(res.statusCode <= 600)){
                 mailOptions.text = "STATUS CODE: " +res.statusCode.toString();
-                transporter.sendMail(mailOptions, (error, info) => {
+                transporter.sendMail(mailOptions, function(error, info){
                     if (error) {
                         return console.log(error);
                     }
@@ -57,7 +57,7 @@ setInterval(checkError,3600000);
         }).on('error', function(e) {
             console.log("Got error: " + e.message);
             mailOptions.text = e.message.toString();
-            transporter.sendMail(mailOptions, (error, info) => {
+            transporter.sendMail(mailOptions, function(error, info) {
                 if (error) {
                     return console.log(error);
                 }
@@ -79,7 +79,7 @@ setInterval(checkError,3600000);
             console.log("SEND EMAIL");
             // send mail with defined transport object
             mailOptions.text = err.toString();
-            transporter.sendMail(mailOptions, (error, info) => {
+            transporter.sendMail(mailOptions, function(error, info) {
                 if (error) {
                     return console.log(error);
                 }
@@ -101,7 +101,7 @@ setInterval(checkError,3600000);
             console.log("SEND EMAIL");
             //console.log(this.url);
            mailOptions.html =err.toString() +  "<br> URL: " + this.url;
-            transporter.sendMail(mailOptions, (error, info) => {
+            transporter.sendMail(mailOptions, function(error, info)  {
                 if (error) {
                     return console.log(error);
                 }
